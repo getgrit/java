@@ -17,15 +17,15 @@ class_body($declarations) where {
             $field <: contains variable_declarator($name) where {
                 $declarations <: not contains $name until field_declaration(),
                 $name <: not or {
-                  `serialVersionUID`,
-                  `serialPersistentFields`,
+                    `serialVersionUID`,
+                    `serialPersistentFields`,
                 },
                 $field => .,
             },
             $modifiers <: contains `private`,
             $modifiers <: not contains or {
-              marker_annotation(),
-              `native`,
+                marker_annotation(),
+                `native`,
             },
         }
     }

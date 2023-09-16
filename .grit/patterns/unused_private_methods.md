@@ -16,8 +16,8 @@ class_body($declarations) where {
         method_declaration(name=$unused_method, $modifiers) as $unused_decl where {
             $modifiers <: contains `private`,
             $modifiers <: not contains or {
-              marker_annotation(),
-              `native`,
+                marker_annotation(),
+                `native`,
             },            
             $unused_method <: not or {
                 `writeObject`,
