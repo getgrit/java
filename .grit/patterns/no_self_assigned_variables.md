@@ -29,6 +29,8 @@ assignment_expression($left, $right) as $assignment where {
 
 ```java
 class Watermelon {
+    private String name;
+
     public void setName(String name) {
         name = name;
     }
@@ -37,6 +39,8 @@ class Watermelon {
 
 ```java
 class Watermelon {
+    private String name;
+
     public void setName(String name) {
         this.name = name;
     }
