@@ -50,7 +50,7 @@ or {
 }
 ```
 
-## Basic example
+## Handles ignored tests and sub-classes
 
 ```java
 import org.junit.jupiter.api.Test;

@@ -20,7 +20,7 @@ language java
 }
 ```
 
-## Basic example
+## Transforms BigDecimal constructor with double argument
 
 ```java
 double d = 1.1;
