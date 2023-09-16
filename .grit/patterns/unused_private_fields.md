@@ -16,9 +16,17 @@ class_body($declarations) where {
         field_declaration($modifiers) as $field where {
             $field <: contains variable_declarator($name) where {
                 $declarations <: not contains $name until field_declaration(),
+                $name <: not or {
+                  `serialVersionUID`,
+                  `serialPersistentFields`,
+                },
                 $field => .,
             },
             $modifiers <: contains `private`,
+            $modifiers <: not contains or {
+              marker_annotation(),
+              `native`,
+            },
         }
     }
 }
@@ -47,5 +55,30 @@ public class MyClass {
   public int compute(int a) {
     return a * bar + 42;
   }
+}
+```
+
+## Does not remove serialization ID fields
+
+```java
+public class MyClass implements java.io.Serializable {
+  private static final long serialVersionUID = 42L;
+}
+```
+
+## Does not remove annotated fields
+
+```java
+public class MyClass {
+  @SomeAnnotation
+  private int unused;
+}
+```
+
+## Does not remove fields with native modifier
+
+```java
+public class MyClass {
+  private native static void doSomethingNative();
 }
 ```

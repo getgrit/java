@@ -15,7 +15,10 @@ class_body($declarations) where {
     $declarations <: contains bubble($declarations) {
         method_declaration(name=$unused_method, $modifiers) as $unused_decl where {
             $modifiers <: contains `private`,
-            $modifiers <: not contains marker_annotation(),
+            $modifiers <: not contains or {
+              marker_annotation(),
+              `native`,
+            },            
             $unused_method <: not or {
                 `writeObject`,
                 `readObject`,
