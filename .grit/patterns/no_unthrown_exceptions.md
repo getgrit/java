@@ -4,7 +4,7 @@ title: Exceptions should not be created without being thrown
 
 # Exceptions should not be created without being thrown
 
-Creating a new Throwable without actually throwing it is useless and is probably due to a mistake.
+Creating a new Throwable without actually throwing or binding it is useless and is probably due to a mistake.
 
 tags: #java
 
@@ -17,6 +17,9 @@ object_creation_expression($type) as $x where {
         r".*Error",
     },
     $x <: not within throw_statement(),
+    $x <: not within variable_declarator($value) where {
+        $value <: $x,
+    },
     $x => `throw $x`,
 }
 ```
@@ -32,6 +35,7 @@ class BadClass {
         if (x > 100) {
             throw new IllegalArgumentException("x must be less than 100");
         }
+        IllegalArgumentException saveIt = new IllegalArgumentException("Don't correct this");
         new NotAThrowable();
         return "some-string";
     }
@@ -47,6 +51,7 @@ class BadClass {
         if (x > 100) {
             throw new IllegalArgumentException("x must be less than 100");
         }
+        IllegalArgumentException saveIt = new IllegalArgumentException("Don't correct this");
         new NotAThrowable();
         return "some-string";
     }
