@@ -4,7 +4,7 @@ title: "BigDecimal(double)" should not be used
 
 # "BigDecimal(double)" should not be used
 
-Because of floating point imprecision, the `BigDecimal(double)` constructor can be somewhat unpredictable.
+Because of floating point imprecision, the `BigDecimal(double)` constructor can be somewhat unpredictable. It is better to use `BigDecimal.valueOf(double)`.
 
 tags: #java
 
